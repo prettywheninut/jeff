@@ -264,23 +264,23 @@
     var answers = {};
 
     var VARIANTS = {
-      rose: {
-        name: "Rose Glow",
-        tag: "For combination skin that can't decide.",
-        desc: "Your T-zone wants a blotting paper; your cheeks want a blanket. Rose Glow is buffered with rose water, glycerin and sandalwood so it mattifies the middle without punishing the edges. Mix with curd on dry days.",
-        price: "₹399"
+      general: {
+        name: "Shuddh Multani Mitti",
+        tag: "For general upkeep, twice a week.",
+        desc: "The plain one — and that's the point. 100% pure clay, triple micro-sifted so it mixes smooth and rinses clean. Use it twice a week on oily skin, once on dry, and follow with moisturiser. Your everyday reset.",
+        price: "₹499"
       },
-      neem: {
-        name: "Neem Clear",
+      acne: {
+        name: "Shuddh Multani Mitti for Acne",
         tag: "For oily, breakout-prone skin.",
-        desc: "Fuller's earth and kaolin pull out oil and congestion, while neem and a whisper of tea tree keep the chin situation calm. It's the weekly reset your skin has been asking for — without the tight, squeaky aftermath.",
-        price: "₹399"
+        desc: "Same clay, positioned for skin that gets oily and congested. The fine texture means no grit dragging across active breakouts, and the clay lifts excess sebum without scrubbing. Two to three times a week, fifteen minutes, then moisturise. It's a cleanser, not a cure.",
+        price: "₹499"
       },
-      saffron: {
-        name: "Saffron Radiance",
-        tag: "For dull, tan-prone skin.",
-        desc: "Saffron, a touch of turmeric and vitamin C help surface dullness and mild tan look clearer and more even. Not a bleach. Not a filter. Just your own glow, with the lights turned up a little.",
-        price: "₹399"
+      tan: {
+        name: "Shuddh Multani Mitti for Tan & Pigmentation",
+        tag: "For dullness and uneven-looking tone.",
+        desc: "For skin that's outdoors a lot. Regular clay masks lift surface oil, sweat and pollution so mild tan and dullness look less patchy over time. It won't bleach or lighten your skin — it just helps your own tone look clearer and more even.",
+        price: "₹499"
       }
     };
 
@@ -323,16 +323,17 @@
     });
 
     function showResult() {
-      var tally = { rose: 0, neem: 0, saffron: 0 };
+      var tally = { general: 0, acne: 0, tan: 0 };
       Object.keys(answers).forEach(function (k) {
         if (tally[answers[k]] !== undefined) tally[answers[k]]++;
       });
-      var winner = "rose";
+      var winner = "general";
       Object.keys(tally).forEach(function (k) {
         if (tally[k] > tally[winner]) winner = k;
       });
-      // tie-break: prefer neem for oil/breakout answers
-      if (tally.neem === tally[winner] && tally.neem > 0 && answers.q2 === "neem") winner = "neem";
+      // tie-break: prefer acne for breakout answers, then tan
+      if (tally.acne === tally[winner] && tally.acne > 0 && answers.q2 === "acne") winner = "acne";
+      else if (tally.tan === tally[winner] && tally.tan > 0 && answers.q2 === "tan") winner = "tan";
 
       var v = VARIANTS[winner];
       resultName.textContent = v.name;
@@ -355,8 +356,8 @@
     });
 
     $("#quizAdd").addEventListener("click", function () {
-      var variant = this.dataset.variant || "Rose Glow";
-      addToCart(variant, 399);
+      var variant = this.dataset.variant || "Shuddh Multani Mitti";
+      addToCart(variant, 499);
     });
 
     showStep(0);
@@ -388,13 +389,11 @@
   }
 
   var addKit = $("#addKit");
-  var addSingle = $("#addSingle");
   var stickyAdd = $("#stickyAdd");
   var cartBtn = $("#cartBtn");
 
-  if (addKit) addKit.addEventListener("click", function () { addToCart("The Shaadi Season Kit", "1,099"); });
-  if (addSingle) addSingle.addEventListener("click", function () { addToCart("Revive Plus — Rose & Saffron", "399"); });
-  if (stickyAdd) stickyAdd.addEventListener("click", function () { addToCart("Revive Plus — Rose & Saffron", "399"); });
+  if (addKit) addKit.addEventListener("click", function () { addToCart("The Complete Care Combo", "499"); });
+  if (stickyAdd) stickyAdd.addEventListener("click", function () { addToCart("Revive+ Shuddh Multani Mitti", "499"); });
   if (cartBtn) cartBtn.addEventListener("click", function () {
     showToast(cartCount === 0 ? "Your bag is empty — the clay is waiting." : "Your bag has " + cartCount + " item" + (cartCount > 1 ? "s" : "") + ".");
   });

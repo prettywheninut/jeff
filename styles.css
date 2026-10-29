@@ -698,6 +698,12 @@ section[id], #top { scroll-margin-top: 92px; }
 .no { color: var(--ink-mute); }
 .mid { color: #A8791E; font-weight: 600; }
 .compare__table td strong { font-family: var(--font-display); font-size: 1rem; }
+.compare__hint {
+  display: none; margin-top: .9rem; text-align: center;
+  font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+@media (max-width: 720px) { .compare__hint { display: block; } }
 
 /* ---------- Reviews ---------- */
 .reviews { padding: clamp(3.5rem, 7vw, 6rem) 0; overflow: hidden; }
@@ -797,11 +803,75 @@ section[id], #top { scroll-margin-top: 92px; }
   color: var(--terracotta);
 }
 .jar--front { left: 50%; top: 96px; transform: translateX(-50%) rotate(-2deg); z-index: 3; }
-.jar--back { z-index: 1; top: 116px; }
-.jar--neem { left: 0; transform: rotate(-11deg); }
-.jar--neem .jar__label i { color: var(--neem); }
-.jar--saffron { right: 0; transform: rotate(11deg); }
-.jar--saffron .jar__label i { color: #A8791E; }
+
+/* rose mist bottle */
+.mist {
+  position: absolute; left: 6px; top: 156px; width: 84px; height: 236px;
+  transform: rotate(-8deg); z-index: 2;
+  filter: drop-shadow(0 16px 20px rgba(107, 36, 19, .16));
+}
+.mist__cap {
+  position: absolute; top: 0; left: 20px; width: 44px; height: 24px;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(180deg, #4A2A1C, #2E180F);
+}
+.mist__neck {
+  position: absolute; top: 23px; left: 30px; width: 24px; height: 18px;
+  background: #EADFCB; border: 1px solid #D9C4A6; border-bottom: 0;
+}
+.mist__body {
+  position: absolute; top: 40px; left: 0; width: 84px; height: 196px;
+  border-radius: 12px 12px 20px 20px;
+  background: linear-gradient(160deg, #FBF0EC, #E7C9C2);
+  border: 1px solid #DCC0B8;
+  overflow: hidden;
+}
+.mist__body::before {
+  content: ""; position: absolute; top: 14px; left: 10px; width: 12px; height: 150px;
+  border-radius: 6px; background: #fff; opacity: .55;
+}
+.mist__label {
+  position: absolute; inset: 48px 10px 40px;
+  border-radius: 5px; background: #FFFDF8; border: 1px solid #E3D2C0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .3rem; text-align: center; padding: .3rem;
+}
+.mist__label b { font-family: var(--font-display); font-size: .62rem; letter-spacing: .1em; font-weight: 600; }
+.mist__label b::after { content: "+"; color: var(--terracotta); font-weight: 800; }
+.mist__label i { font-family: var(--font-display); font-style: italic; font-size: .56rem; color: #A75A66; }
+
+/* aloe gel tube */
+.tube {
+  position: absolute; right: 4px; top: 170px; width: 78px; height: 230px;
+  transform: rotate(8deg); z-index: 2;
+  filter: drop-shadow(0 16px 20px rgba(60, 83, 64, .16));
+}
+.tube__body {
+  position: absolute; top: 0; left: 0; width: 78px; height: 204px;
+  border-radius: 12px 12px 8px 8px;
+  background: linear-gradient(160deg, #F1F7EA, #CBDCC0);
+  border: 1px solid #B9CBAE;
+  overflow: hidden;
+}
+.tube__body::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px;
+  background: repeating-linear-gradient(90deg, #B9CBAE 0 3px, transparent 3px 6px);
+  opacity: .8;
+}
+.tube__label {
+  position: absolute; inset: 30px 9px 34px;
+  border-radius: 5px; background: #FFFDF8; border: 1px solid #D5E2CB;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .3rem; text-align: center; padding: .3rem;
+}
+.tube__label b { font-family: var(--font-display); font-size: .6rem; letter-spacing: .1em; font-weight: 600; }
+.tube__label b::after { content: "+"; color: var(--terracotta); font-weight: 800; }
+.tube__label i { font-family: var(--font-display); font-style: italic; font-size: .55rem; color: var(--neem); }
+.tube__cap {
+  position: absolute; bottom: 0; left: 15px; width: 48px; height: 26px;
+  border-radius: 3px 3px 9px 9px;
+  background: linear-gradient(180deg, #4C6650, #2F4434);
+}
 .offer__seal {
   position: absolute; top: 3%; right: 3%;
   width: 92px; height: 92px; border-radius: 50%;
